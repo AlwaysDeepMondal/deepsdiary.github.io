@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep's Diary</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme-preference');
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">Deep's Diary</div>
+        <ul class="navbar-nav">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li class="theme-toggle-li">
+                <label class="theme-switch" for="theme-toggle-checkbox-index">
+                    <input type="checkbox" id="theme-toggle-checkbox-index" />
+                    <div class="slider round"></div>
+                </label>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Your favorite moment we'll hold on</h1>
+            <p>Capturing the essence of life, one frame at a time. Explore my portfolio of landscapes, portraits, and events, where every image tells a unique story.</p>
+            <a href="gallery.html" class="btn-primary">Gallery</a>
+        </div>
+        <div class="hero-image">
+            <img src="images/hero-main1.png" alt="Photographer with examples of photos">
+            <div class="overlay-card card-1">
+                <img src="images/overlay-1.jpg" alt="Portrait photo example">
+            </div>
+            <div class="overlay-card card-2">
+                <img src="images/overlay-2.jpg" alt="Portrait photo example">
+            </div>
+             <div class="best-photo-badge">
+                👍 Best Of Deep Mondal
+            </div>
+        </div>
+    </div>
+
+    <div class="about-me-section">
+        <div class="about-me-content">
+            <div class="about-me-image">
+                <img src="images/profile-picture.jpg" alt="Your Name">
+            </div>
+            <div class="about-me-text">
+                <h2>About Me</h2>
+                <p>Hello! I'm Deep Mondal, a passionate photographer based in Kolkata. My journey began over 7 years ago, and I've been in love with capturing moments ever since.</p>
+                <p>I specialize in Street, Product, Model, Creative photography and the area of cinematography and reel making, focusing on authentic emotion and timeless beauty.</p>
+                <p>My goal is to tell your story, one frame at a time.</p>
+                <a href="contact.html" class="btn-primary">Let's Work Together</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const toggleSwitch = document.getElementById('theme-toggle-checkbox-index');
+            const htmlEl = document.documentElement;
+            const themeKey = 'theme-preference';
+
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    htmlEl.classList.add('dark-mode');
+                    toggleSwitch.checked = true;
+                    localStorage.setItem(themeKey, 'dark');
+                } else {
+                    htmlEl.classList.remove('dark-mode');
+                    toggleSwitch.checked = false;
+                    localStorage.setItem(themeKey, 'light');
+                }
+            }
+            if (htmlEl.classList.contains('dark-mode')) {
+                toggleSwitch.checked = true;
+            }
+            toggleSwitch.addEventListener('change', () => {
+                if (toggleSwitch.checked) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

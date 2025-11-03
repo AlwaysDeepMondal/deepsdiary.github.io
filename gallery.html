@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Photography Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme-preference');
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-brand">Deep's Diary</div>
+        <ul class="navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html" class="active">Gallery</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li class="theme-toggle-li">
+                <label class="theme-switch" for="theme-toggle-checkbox-gallery">
+                    <input type="checkbox" id="theme-toggle-checkbox-gallery" />
+                    <div class="slider round"></div>
+                </label>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <h1>My Gallery</h1>
+        <p>A collection of my recent and favorite work.</p>
+    </div>
+
+    <div class="gallery-container">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="Gimages/gallery-1.jpg" alt="Description of photo 1">
+            </div>
+            <div class="gallery-item">
+                <img src="Gimages/gallery-2.jpg" alt="Description of photo 2">
+            </div>
+            <div class="gallery-item">
+                <img src="Gimages/gallery-3.jpg" alt="Description of photo 3">
+            </div>
+            <div class="gallery-item">
+                <img src="Gimages/gallery-4.jpg" alt="Description of photo 4">
+            </div>
+            <div class="gallery-item">
+                <img src="Gimages/gallery-5.jpg" alt="Description of photo 5">
+            </div>
+            <div class="gallery-item">
+                <img src="Gimages/gallery-6.jpg" alt="Description of photo 6">
+            </div>
+            </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Deep Mondal Photography. All rights reserved.</p>
+    </footer>
+    <script>
+        (function() {
+            const toggleSwitch = document.getElementById('theme-toggle-checkbox-gallery');
+            const htmlEl = document.documentElement;
+            const themeKey = 'theme-preference';
+
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    htmlEl.classList.add('dark-mode');
+                    toggleSwitch.checked = true;
+                    localStorage.setItem(themeKey, 'dark');
+                } else {
+                    htmlEl.classList.remove('dark-mode');
+                    toggleSwitch.checked = false;
+                    localStorage.setItem(themeKey, 'light');
+                }
+            }
+            if (htmlEl.classList.contains('dark-mode')) {
+                toggleSwitch.checked = true;
+            }
+            toggleSwitch.addEventListener('change', () => {
+                if (toggleSwitch.checked) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

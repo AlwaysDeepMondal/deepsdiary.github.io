@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Photography Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+   
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme-preference');
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-brand">Deep's Diary</div>
+        <ul class="navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+      
+            
+            <li class="theme-toggle-li">
+                <label class="theme-switch" for="theme-toggle-checkbox-contact">
+                    
+                    <input type="checkbox" id="theme-toggle-checkbox-contact" />
+                    
+                    <div class="slider round"></div>
+                </label>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <h1>Get in Touch</h1>
+        <p>I'd love to hear from you. Let's create something beautiful together.</p>
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-form-wrapper">
+            <h3>Send me a message</h3>
+            <form class="contact-form" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+                <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <h3>Contact Information</h3>
+            <p><strong>Email:</strong> deepmondale288@gmail.com</p>
+            <p><strong>Phone:</strong> +91 1234567890 </p>
+            <p><strong>Location:</strong> Kolkata, West Bengal, India</p>
+            <h3>Follow Me</h3>
+            <p class="social-links">
+                <a href="https://www.instagram.com/medeepmondal" target="_blank">Instagram</a>
+                <a href="https://www.linkedin.com/in/deep-mondal-b91b3520b/" target="_blank">LinkedIn</a>
+                <a href="https://facebook.com/yourprofile" target="_blank">Facebook</a>
+            </p>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Deep Mondal Photography. All rights reserved.</p>
+    </footer>
+
+    <script>
+        (function() {
+            // This line MUST match the ID in the HTML:
+            const toggleSwitch = document.getElementById('theme-toggle-checkbox-contact');
+            
+            // This code will fail silently if 'toggleSwitch' is null (not found)
+            const htmlEl = document.documentElement;
+            const themeKey = 'theme-preference';
+
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    htmlEl.classList.add('dark-mode');
+                    toggleSwitch.checked = true;
+                    localStorage.setItem(themeKey, 'dark');
+                } else {
+                    htmlEl.classList.remove('dark-mode');
+                    toggleSwitch.checked = false;
+                    localStorage.setItem(themeKey, 'light');
+                }
+            }
+            if (htmlEl.classList.contains('dark-mode')) {
+                toggleSwitch.checked = true;
+            }
+            
+            // This is the listener that makes the click work
+            toggleSwitch.addEventListener('change', () => {
+                if (toggleSwitch.checked) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,718 @@
+/* ADD THIS AT THE TOP OF STYLE.CSS */
+
+@font-face {
+    font-family: 'Creattion'; /* This is the name you'll use in your CSS */
+    src: url('fonts/Creattion.woff2') format('woff2'); /* This is the path to the file */
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Helps with loading speed */
+}
+
+/* --- Your other styles ( :root, body, etc... ) --- */
+/* --- Color & Theme Variables --- */
+:root {
+    --bg-primary: #f8f8fc;
+    --bg-secondary: #fff;
+    --bg-tertiary: #f0f0ff;
+    --bg-input: #f8f8fc;
+    --bg-tab-active: #ede9fe;
+    --bg-badge: #d1fae5;
+    --bg-hero-image: #7c3aed;
+
+    --text-primary: #333;
+    --text-secondary: #555;
+    --text-tertiary: #666;
+    --text-muted: #777;
+    --text-footer: #888;
+    --text-badge: #047857;
+
+    --brand-primary: #5b21b6;
+    --brand-hover: #6d28d9;
+    --brand-text: #5b21b6;
+    
+    --border-primary: #ddd;
+    --border-secondary: #eee;
+    --border-focus: #5b21b6;
+
+    --shadow-color-light: rgba(0, 0, 0, 0.05);
+    --shadow-color-medium: rgba(0, 0, 0, 0.08);
+    --shadow-color-dark: rgba(0, 0, 0, 0.12);
+}
+
+html.dark-mode {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --bg-tertiary: #2a2a2e;
+    --bg-input: #2a2a2e;
+    --bg-tab-active: #3a304d;
+    --bg-badge: #064e3b;
+    --bg-hero-image: #5b21b6;
+
+    --text-primary: #f0f0f0;
+    --text-secondary: #c0c0c0;
+    --text-tertiary: #a0a0a0;
+    --text-muted: #888;
+    --text-footer: #777;
+    --text-badge: #a7f3d0;
+
+    --brand-primary: #7c3aed; /* Make brand slightly brighter */
+    --brand-hover: #8b5cf6;
+    --brand-text: #a78bfa; /* Brighter for active links */
+    
+    --border-primary: #444;
+    --border-secondary: #333;
+    --border-focus: #7c3aed;
+
+    --shadow-color-light: rgba(255, 255, 255, 0.05);
+    --shadow-color-medium: rgba(255, 255, 255, 0.08);
+    --shadow-color-dark: rgba(255, 255, 255, 0.12);
+}
+
+/* --- Global Styles --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Navbar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: var(--bg-secondary);
+    box-shadow: 0 2px 4px var(--shadow-color-light);
+    transition: background-color 0.3s ease;
+}
+
+.navbar-brand {
+    font-family: 'Creattion', cursive; /* <-- USE YOUR CUSTOM FONT NAME */
+    font-size: 2.8rem; /* <-- Increased size for readability */
+    font-weight: normal; /* <-- Use the font's natural weight */
+    color: var(--brand-primary);
+}
+
+.navbar-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav li {
+    margin-left: 30px;
+}
+
+.navbar-nav a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav a.active {
+    color: var(--brand-text);
+}
+
+.navbar-nav a.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 3px;
+    background-color: var(--brand-text);
+    border-radius: 2px;
+}
+
+.navbar-nav a:hover {
+    color: var(--brand-text);
+}
+
+/* --- Theme Toggle Switch --- */
+.navbar-nav .theme-toggle-li {
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--brand-primary);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--brand-primary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/* --- Hero Section --- */
+.hero-section {
+    background-color: var(--bg-tertiary);
+    padding: 80px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden; /* Important to keep shadow contained and prevent overflow issues */
+    min-height: 600px;
+    margin: 40px auto; /* Add margin to center it and give space for shadow */
+    max-width: 1200px; /* Constrain width to see the rounded corners and shadow */
+    border-radius: 25px; /* <-- ADD THIS: Rounded corners */
+    box-shadow: 0 15px 40px var(--shadow-color-dark); /* <-- ADD THIS: A more prominent shadow */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+}
+
+.hero-content {
+    max-width: 500px;
+    margin-right: 50px;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--text-tertiary);
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background-color: var(--brand-primary);
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none; /* For the <a> tag */
+    display: inline-block; /* For the <a> tag */
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--brand-hover);
+}
+
+.hero-image {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-hero-image);
+    border-radius: 50%; /* <-- THIS IS THE CHANGED LINE */
+    box-shadow: 0 15px 40px var(--shadow-color-dark);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+}
+
+.hero-image > img { /* Main image inside hero-image */
+    width: 80%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 5px 20px var(--shadow-color-medium);
+    position: relative;
+    z-index: 2;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.hero-image:hover > img {
+    transform: scale(1.05); /* Zoom in slightly */
+    box-shadow: 0 8px 30px var(--shadow-color-dark); /* Make the shadow pop */
+}
+.overlay-card {
+    position: absolute;
+    background-color: var(--bg-secondary);
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0 5px 15px var(--shadow-color-light);
+    z-index: 3;
+}
+
+.overlay-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+.overlay-card:hover {
+    transform: scale(1.05); /* Zoom in slightly */
+    box-shadow: 0 8px 30px var(--shadow-color-dark); /* Make the shadow pop */
+}
+
+.card-1 {
+    top: 50px;
+    left: 20px;
+    transform: rotate(-10deg);
+}
+
+
+.card-2 {
+    bottom: 30px;
+    right: 50px;
+    transform: rotate(15deg);
+}
+.best-photo-badge {
+    position: absolute;
+    bottom: 20%;
+    left: -20px;
+    background-color: var(--bg-badge);
+    color: var(--text-badge);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    box-shadow: 0 2px 5px var(--shadow-color-light);
+    z-index: 4;
+    transform: rotate(-5deg);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.best-photo-badge:hover {
+    transform: scale(1.05); /* Zoom in slightly */
+    box-shadow: 0 8px 30px var(--shadow-color-dark); /* Make the shadow pop */
+}
+
+/* --- How it Works Section --- */
+.how-it-works-section {
+    padding: 80px 50px;
+    text-align: center;
+    background-color: var(--bg-secondary);
+    transition: background-color 0.3s ease;
+}
+
+.how-it-works-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.camera-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+}
+
+.how-it-works-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.how-it-works-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    gap: 20px;
+}
+
+.tab-button {
+    background-color: transparent;
+    border: 2px solid var(--border-primary);
+    border-radius: 30px;
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-button.active,
+.tab-button:hover {
+    background-color: var(--bg-tab-active);
+    border-color: var(--brand-primary);
+    color: var(--brand-text);
+}
+
+.how-it-works-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.how-it-works-content .content-image {
+    width: 60%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--shadow-color-medium);
+    margin-bottom: 30px;
+}
+
+.how-it-works-content .content-text {
+    max-width: 700px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* --- Gallery Page Styles --- */
+.page-header {
+    background-color: var(--bg-tertiary);
+    padding: 60px 20px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    color: var(--text-tertiary);
+    margin-top: 0;
+}
+
+.gallery-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    background-color: var(--bg-secondary);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-color-medium);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-color-dark);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- Contact Page Styles --- */
+.contact-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    background-color: var(--bg-secondary);
+    border-radius: 10px;
+    box-shadow: 0 5px 20px var(--shadow-color-medium);
+    transition: background-color 0.3s ease;
+}
+
+.contact-form-wrapper {
+    flex: 2;
+    min-width: 300px;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 250px;
+    background-color: var(--bg-input);
+    padding: 30px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form-wrapper h3,
+.contact-info h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--brand-primary);
+    padding-bottom: 8px;
+    display: inline-block;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    background-color: var(--bg-secondary);
+    box-shadow: 0 0 0 2px var(--bg-tab-active);
+}
+
+.contact-form .btn-primary {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 15px;
+}
+
+.contact-info p {
+    margin-bottom: 15px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 15px;
+    color: var(--brand-text);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}
+
+/* --- Footer --- */
+.site-footer {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-secondary);
+    color: var(--text-footer);
+    margin-top: 60px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 50px 20px;
+    }
+
+    .hero-content {
+        margin-right: 0;
+        margin-bottom: 40px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-image {
+        width: 100%;
+        max-width: 400px;
+        height: 400px;
+    }
+
+    .overlay-card {
+        display: none;
+    }
+    .best-photo-badge {
+        bottom: 10%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        transform: none;
+    }
+
+    .how-it-works-tabs {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .tab-button {
+        width: 80%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+
+    .navbar-nav {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navbar-nav li {
+        margin: 5px 10px;
+    }
+    
+    .navbar-nav .theme-toggle-li {
+        margin-top: 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .how-it-works-header h2 {
+        font-size: 2rem;
+    }
+
+    .how-it-works-content .content-image {
+        width: 90%;
+    }
+    
+    .contact-container {
+        flex-direction: column-reverse;
+    }
+}
+/* --- About Me Section --- */
+.about-me-section {
+    padding: 80px 50px;
+    background-color: var(--bg-secondary);
+    transition: background-color 0.3s ease;
+    /* Make this section fit in with the hero section styling */
+    margin: 40px auto; 
+    max-width: 1200px; 
+    border-radius: 25px; 
+    box-shadow: 0 15px 40px var(--shadow-color-dark);
+}
+
+.about-me-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.about-me-image {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-me-image img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%; /* Make the image circular */
+    box-shadow: 0 10px 30px var(--shadow-color-medium);
+}
+
+.about-me-text {
+    flex: 2; /* Text takes up more space */
+}
+
+.about-me-text h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 0;
+}
+
+.about-me-text p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.about-me-text .btn-primary {
+    margin-top: 20px; /* Add space above the button */
+}
+
+/* Responsive stacking for the About Me section */
+@media (max-width: 768px) {
+    .about-me-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .about-me-image img {
+        width: 200px;
+        height: 200px;
+    }
+}
